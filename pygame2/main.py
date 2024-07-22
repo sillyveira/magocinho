@@ -2,6 +2,8 @@ import pygame
 from config import *
 from sprites import Block, Chao, Item
 from player import Player
+from inimigo import Inimigo
+from ui import UI
 import sys
 
 class JOGO:
@@ -36,7 +38,9 @@ class JOGO:
                 if tilemap[i][j] == "c":
                     Chao(self,j, i)
                     Item(self, j, i, 'cogumelo')
+        Inimigo(self, 4, 5)
 
+        self.ui = UI(self)
     def events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -44,9 +48,11 @@ class JOGO:
                 self.Executando = False
             if event.type == TIMER_COGUMELO:
                 self.player.speed = VELOCIDADE_JOGADOR
+                self.player.usingMush = False
                 pygame.time.set_timer(TIMER_COGUMELO, 0) #desliga o timer
             if event.type == TIMER_POCAO:
                 self.player.invisivel = True
+                self.player.usingPotion = False
                 pygame.time.set_timer(TIMER_POCAO, 0)
     def update(self):
         self.all_sprites.update()
@@ -56,6 +62,7 @@ class JOGO:
         self.tela.fill('black')
         self.all_sprites.draw(self.tela)
         self.clock.tick(FPS)
+        self.ui.display(self.player)
         pygame.display.update()
 
     def main(self):

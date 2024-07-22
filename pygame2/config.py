@@ -17,6 +17,7 @@ TIMER_DELAY_COGUMELO = 2000
 
 TIMER_POCAO = pygame.USEREVENT+1
 TIMER_COGUMELO = pygame.USEREVENT+2
+
 tilemap = [
     'BBBBBBBBBBBBBBBBBBBB',
     'B.............c....B',

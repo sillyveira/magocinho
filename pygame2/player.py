@@ -14,6 +14,12 @@ class Player(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.items = []
+
+        self.usingPotion = False
+        self.usingMush = False
+        self.temPotion = False
+        self.temMush = False
+
         self.x = x * TILESIZE_PLAYER
         self.y = y * TILESIZE_PLAYER
         self.width = TILESIZE_PLAYER
@@ -55,8 +61,19 @@ class Player(pygame.sprite.Sprite):
                 self.y_c -= self.speed
                 self.direcao = 'cima'
 
-            if keys[pygame.K_h]:
-                 Item(self.game, 3, 4, 'cogumelo')
+            if keys[pygame.K_q]: #usar pocao
+                if self.usingPotion == False:
+                     self.temPotion = False
+                     self.usingPotion = True
+                     pygame.time.set_timer(TIMER_POCAO, TIMER_DELAY_POCAO)
+
+            if keys[pygame.K_e]: #usar cogumelo
+                if self.usingMush == False:
+                    self.temMush = False
+                    self.speed = 50
+                    self.usingMush = True
+                    pygame.time.set_timer(TIMER_COGUMELO, TIMER_DELAY_COGUMELO)   
+
     def collision(self, direction):
         hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
         if direction == "x":
@@ -71,7 +88,11 @@ class Player(pygame.sprite.Sprite):
         
         if hit_item:
             item = hit_item[0]
-            hit_item[0].kill() #remove o item do mapa
-            if item.tipo == 'cogumelo':
-                self.speed = 50
-                pygame.time.set_timer(TIMER_COGUMELO, TIMER_DELAY_COGUMELO)
+            if item.tipo == 'cogumelo' and self.temMush == False:
+                hit_item[0].kill() #remove o item do mapa
+                self.temMush = True
+
+            if item.tipo == 'pocao' and self.temPotion == False:
+                hit_item[0].kill() #remove o item do mapa
+                self.temPotion = True
+                
