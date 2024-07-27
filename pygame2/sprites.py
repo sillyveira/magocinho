@@ -51,7 +51,7 @@ class Item(pygame.sprite.Sprite):
           self.y = (y * 64)+16
           self.width = 32
           self.height = 32
-          self.image = pygame.image.load(join('pygame2', 'img', f'{nome_item}.png')).convert_alpha()
+          self.image = pygame.image.load(join('img', f'{nome_item}.png')).convert_alpha()
           
           self.tipo = nome_item
           self.rect = self.image.get_rect()

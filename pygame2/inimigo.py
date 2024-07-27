@@ -19,7 +19,7 @@ class Inimigo(pygame.sprite.Sprite):
 
         self.image = pygame.Surface([self.width, self.height])
         #self.image = pygame.image.load(join('pygame2', 'img', 'magicinho.png')).convert_alpha()
-        self.image.fill('green')
+        self.image.fill('blue')
 
         self.rect = self.image.get_rect()
         self.rect.x = self.x
