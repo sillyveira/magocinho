@@ -70,7 +70,7 @@ class Player(pygame.sprite.Sprite):
             if keys[pygame.K_e]: #usar cogumelo
                 if self.usingMush == False:
                     self.temMush = False
-                    self.speed = 50
+                    self.speed = 15
                     self.usingMush = True
                     pygame.time.set_timer(TIMER_COGUMELO, TIMER_DELAY_COGUMELO)   
 

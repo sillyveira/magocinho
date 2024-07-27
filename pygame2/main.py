@@ -38,7 +38,6 @@ class JOGO:
                 if tilemap[i][j] == "c":
                     Chao(self,j, i)
                     Item(self, j, i, 'cogumelo')
-        Inimigo(self, 4, 5)
 
         self.ui = UI(self)
     def events(self):

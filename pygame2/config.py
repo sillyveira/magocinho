@@ -20,14 +20,16 @@ TIMER_COGUMELO = pygame.USEREVENT+2
 
 tilemap = [
     'BBBBBBBBBBBBBBBBBBBB',
-    'B.............c....B',
-    'B..................B',
-    'B...c.........p....B',
-    'B..................B',
-    'B..................B',
-    'B..BBBB.....B.B.B..B',
-    'B.....B.....B.B.B..B',
-    'B.....BBBBB.BBB.B..B',
-    'B......p...........B',
+    'B...BB...BB........B',
+    'B.B..B.B....BBB.BB.B',
+    'B.BB.B.BBBB.BB..BB.B',
+    'B...........BB.BBB.B',
+    'BBB.B.BB.BB........B',
+    'B...B.BB.BB.BBBBBBBB',
+    'B.BBB.BB.BB.....BBBB',
+    'B............BB....B',
+    'B.BBBBB.B.BB.BBBBB.B',
+    'B.......B..........B',
+    'BBBBBBBBBBBBBBBBBBBB',
     'BBBBBBBBBBBBBBBBBBBB'
 ]
