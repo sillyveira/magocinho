@@ -3,7 +3,7 @@ from config import *
 from sprites import Block, Chao, Item, Barra
 from player import Player
 from inimigo import Inimigo
-from grafo import Vertice
+from vertice import Vertice
 from ui import UI
 import sys
 #Importação da biblioteca do pygame, dos sprites, do jogador, do inimigo e do vértice
@@ -31,18 +31,18 @@ class JOGO:
         #instanciando o jogador
         self.player = Player(self, 1.1, 1.1)
         #lendo o mapa feito nas configurações (config.py)
-        for i in range(len(tilemap)):
-            for j in range(len(tilemap[i])):
-                if tilemap[i][j] == "B":
+        for i in range(len(TILEMAP)):
+            for j in range(len(TILEMAP[i])):
+                if TILEMAP[i][j] == "B":
                     Block(self, j, i)
-                if tilemap[i][j] == ".":
+                if TILEMAP[i][j] == ".":
                     Chao(self, j, i)
-                if tilemap[i][j] == "g":
+                if TILEMAP[i][j] == "g":
                     Chao(self,j, i)
-                if tilemap[i][j] == "p":
+                if TILEMAP[i][j] == "p":
                     Chao(self,j, i)
                     Item(self, j, i, 'pocao')
-                if tilemap[i][j] == "c":
+                if TILEMAP[i][j] == "c":
                     Chao(self,j, i)
                     Item(self, j, i, 'cogumelo')
         #sprite das barras no mapa
