@@ -141,9 +141,9 @@ class JOGO:
         self.ply_x = 0
         self.ply_y = 0
     def new(self):
-      #  pygame.mixer.music.set_volume(0.2)
-      #  musica_de_fundo = pygame.mixer.music.load('gameplay_soundtrack.MP3')
-      #  pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.5)
+        musica_de_fundo = pygame.mixer.music.load('gameplay_soundtrack.MP3')
+        pygame.mixer.music.play(-1)
         self.Jogando = True
 
         pygame.mixer.music.set_volume(0.5)
