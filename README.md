@@ -27,9 +27,9 @@ O jogo acompanha o personagem principal que é o **MagoCINho**, ele é baseado n
 
 ## Capturas de Tela
 <div style="display: flex; justify-content: space-around;">
-  <img src="img\telamagocinho.webp" alt="Imagem 1">
-  <img src="img\telamenu.png" alt="Imagem 2" width="412">
-  <img src="img\telagameover.webp" alt="Imagem 3" width="412">
+  <img src="img\telamagocinho.webp" alt="Tela do jogo">
+  <img src="img\telamenu.png" alt="Tela Menu" width="412">
+  <img src="img\telagameover.webp" alt="Tela Game Over" width="412">
 </div>
 
 ## Ferramentas, Frameworks e Bibliotecas utilizados
