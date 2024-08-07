@@ -15,6 +15,8 @@ class Player(pygame.sprite.Sprite):
 
         self.items = []
 
+        self.pontos = 0
+
         self.usingPotion = False
         self.usingMush = False
         self.temPotion = False
@@ -135,6 +137,10 @@ class Player(pygame.sprite.Sprite):
                 hit_item[0].kill() #remove o item do mapa
                 self.temPotion = True
                 self.game.barulho_pega_item.play()
+
+            if item.tipo == 'moeda':
+                hit_item[0].kill() #remove o item do mapa
+                self.pontos += 1
 
         hit_inimigo = pygame.sprite.spritecollide(self, self.game.enemies, False)
 
