@@ -57,7 +57,7 @@ Os diversos conceitos aprendidos ao decorrer da disciplina foram utilizados dura
 Além disso, o emprego de **funções** favoreceu o desenvolvimento dos objetos das classes, tal qual os estudos sobre **Programação Orientada a Objetos (POO)**, uma exigência do projeto, facilitou a escrita do código, tornando mais fácil o seu entendimento e sua modificação.
 
 ## Desafios, Erros e Lições aprendidas
-* --Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?__
+* __Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?__
 > O maior erro cometido durante a confecção do projeto foi a falta de organização do tempo no início do trabalho, o que acabou prejudicando um pouco o andamento da construção do jogo. Entretanto, lidamos com isso ao atribuir definitivamente as tarefas de cada integrante do projeto, melhorando a organização interna e o uso do nosso tempo.
 * __Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?__
 > O maior desafio do projeto foi desenvolver a inteligência do inimigo no jogo. Para superá-lo, realizamos pesquisas aprofundadas e consultamos referências de inteligências criadas para inimigos de outros jogos.
