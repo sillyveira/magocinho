@@ -81,7 +81,7 @@ class Inimigo(pygame.sprite.Sprite):
                     else:
                         self.movimento_inimigo_2()
 
-        def movimento_inimigo_1(self):
+    def movimento_inimigo_1(self):
             self.ply_x, self.ply_y = self.game.ply_x, self.game.ply_y
             var_temp = 0
             if abs(self.ply_y - self.rect.y) > abs(self.ply_x - self.rect.x):
@@ -119,7 +119,7 @@ class Inimigo(pygame.sprite.Sprite):
                     self.direcao = self.direcoes[0]
                     self.direcao_reversa = -self.direcao
 
-        def movimento_inimigo_2(self):
+    def movimento_inimigo_2(self):
                 # Verificar o tamanho da lista de direções possíveis
                 if len(self.direcoes) > 1: 
                     if self.direcao_reversa in self.direcoes: # Remover a direção reversa
