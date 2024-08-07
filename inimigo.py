@@ -81,52 +81,257 @@ class Inimigo(pygame.sprite.Sprite):
                     else:
                         self.movimento_inimigo_2()
 
-    def movimento_inimigo_1(self):
-        self.ply_x, self.ply_y = self.game.ply_x, self.game.ply_y
-        var_temp = 0
-        if abs(self.ply_y - self.rect.y) > abs(self.ply_x - self.rect.x):
-            #Se a distância em Y for maior, priorizá-la. o X está mais alinhado que o Y caso seja menor,
-            #então a decisão lógica seria alcançar o jogador pelo Y.
-            if self.ply_y > self.rect.y and BAIXO in self.direcoes and self.direcao_reversa != BAIXO:
-                self.direcao_reversa = CIMA
-                self.direcao = BAIXO
-                var_temp = 1
-            elif self.ply_y < self.rect.y and CIMA in self.direcoes and self.direcao_reversa != CIMA:
-                self.direcao_reversa = BAIXO
-                self.direcao = CIMA
-                var_temp = 1
-        else:
-            if self.ply_x > self.rect.x and DIREITA in self.direcoes and self.direcao_reversa != DIREITA: 
-                #Se a distância em X for maior, priorizá-la. Mesma justificativa do comentário acima
-                self.direcao_reversa = ESQUERDA
-                self.direcao = DIREITA
-                var_temp = 1        
-            elif self.ply_x < self.rect.x and ESQUERDA in self.direcoes and self.direcao_reversa != ESQUERDA:
+        def movimento_inimigo1(self):
+
+            if self.direcao == 'direita':
+                if self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']:
+                    self.posicao_x += self.velocidade
+                elif not self.curvas['direita']:
+                    if self.alvo['coordenada_y'] > self.posicao_y and self.curvas['baixo']:
+                        self.direcao = 'virar para baixo'
+                        self.posicao_y += self.velocidade
+                    elif self.alvo['coordenada_y'] < self.posicao_y and self.curvas['direita']:
+                        self.direcao = 'cima'
+                        self.posicao_y -= self.velocidade
+                    elif self.alvo['coordenada_x']  < self.posicao_x and self.curvas['esquerda']: # self.curvas['esquerda'] = pode ir pra esquerda
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['baixo']:
+                        self.direcao = 'baixo'
+                        self.posicao_y -= self.velocidade
+                    elif self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y += self.velocidade
+                    elif self.curvas['esquerda']:
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                elif self.curvas['direita']:
+                    if self.alvo['coordenada_y'] > self.posicao_y and self.curvas['baixo']:
+                        self.direcao = 'baixo'
+                        self.posicao_y += self.velocidade
+                    if self.alvo['coordenada_y'] < self.posicao_y and self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y -= self.velocidade
+                    else:
+                        self.posicao_x += self.velocidade 
+
+            elif self.direcao == 'esquerda':
+                if self.alvo['coordenada_y'] > self.posicao_y and self.curvas['baixo']:
+                    self.direcao = 'baixo'
+                elif self.alvo['coordenada_x'] < self.posicao_x and self.curvas['direita']:
+                    self.posicao_x += self.velocidade
+
+                elif not self.curvas['esquerda']:
+                    if self.alvo['coordenada_y'] > self.posicao_y and self.curvas['baixo']:
+                        self.direcao = 'virar para baixo'
+                        self.posicao_y += self.velocidade
+                    elif self.alvo['coordenada_y'] < self.posicao_y and self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y -= self.velocidade
+                    elif self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']: # self.curvas['esquerda'] = pode ir pra esquerda
+                        self.direcao = 'direita'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['baixo']:
+                        self.direcao = 'baixo'
+                        self.posicao_y -= self.velocidade
+                    elif self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y += self.velocidade
+                    elif self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x -= self.velocidade
+                elif self.curvas['esquerda']:
+                    if self.alvo['coordenada_y'] > self.posicao_y and self.curvas['baixo']:
+                        self.direcao = 'baixo'
+                        self.posicao_y += self.velocidade
+                    if self.alvo['coordenada_y'] < self.posicao_y and self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y -= self.velocidade
+                    else:
+                        self.posicao_x -= self.velocidade 
+
+
+            elif self.direcao == 'cima': 
+                if self.alvo['coordenada_x'] < self.posicao_x and self.curvas['esquerda']:
+                    self.direcao = 'esquerda'
+                    self.posicao_x -= self.velocidade
+                elif self.alvo['coordenada_y'] < self.posicao_y and self.curvas['cima']:
+                    self.posicao_y -= self.velocidade
+
+                elif not self.curvas['cima']:
+                    if self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x += self.velocidade
+                    elif self.alvo['coordenada_x'] < self.posicao_x and self.curvas['esquerda']:
+                        self.direcao = 'esquerda' 
+                        self.posicao_x -= self.velocidade
+                    elif self.alvo['coordenada_y'] > self.posicao_y and self.curvas['baixo']: # self.curvas['esquerda'] = pode ir pra esquerda
+                        self.direcao = 'baixo'
+                        self.posicao_x += self.velocidade
+                    elif self.curvas['baixo']:
+                        self.direcao = 'cima'
+                        self.posicao_y -= self.velocidade
+                    elif self.curvas['esquerda']:
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x -= self.velocidade
+                elif self.curvas['cima']:
+                    if self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x += self.velocidade
+                    elif self.alvo['coordenada_x'] < self.posicao_x and self.curvas['esquerda']:
+                        self.direcao = 'esquerda' 
+                        self.posicao_x -= self.velocidade 
+                    else:
+                        self.posicao_y -= self.velocidade 
+            
+            elif self.direcao == 'baixo': 
+                if self.alvo['coordenada_y'] > self.posicao_y and self.curvas['baixo']: #pode continuar para baixo
+                    self.posicao_y += self.velocidade
+
+                elif not self.curvas['baixo']:
+                    if self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x += self.velocidade
+                    elif self.alvo['coordenada_x'] < self.posicao_x and self.curvas['esquerda']:
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                    elif self.alvo['coordenada_y'] < self.posicao_y and self.curvas['cima']: #pode continuar para baixo
+                        self.direcao = 'cima'
+                        self.posicao_y -= self.velocidade
+                    elif self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y -= self.velocidade
+                    elif self.curvas['esquerda']:
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x += self.velocidade
+
+
+                elif self.curvas['baixo']:
+                    if self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x += self.velocidade
+                    elif self.alvo['coordenada_x'] < self.posicao_x and self.curvas['esquerda']:
+                        self.direcao = 'esquerda' 
+                        self.posicao_x -= self.velocidade 
+                    else:
+                        self.posicao_y += self.velocidade
+
+        def movimento_inimigo2(self):
+
+
+            if self.direcao == 'cima': 
+                if self.alvo['coordenada_x'] > self.posicao_x and self.curvas['esquerda']:
+                    self.direcao = 'esquerda'
+                    self.posicao_x -= self.velocidade
+                elif self.alvo['coordenada_y'] > self.posicao_y and self.curvas['cima']:
+                    self.posicao_y += self.velocidade
+
+                elif not self.curvas['cima']:
+                    if self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x += self.velocidade
+                    elif self.alvo['coordenada_x'] < self.posicao_x and self.curvas['esquerda']:
+                        self.direcao = 'esquerda' 
+                        self.posicao_x -= self.velocidade
+                    elif self.alvo['coordenada_y'] < self.posicao_y and self.curvas['baixo']: # self.curvas['esquerda'] = pode ir pra esquerda
+                        self.direcao = 'baixo'
+                        self.posicao_x += self.velocidade
+                    elif self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['baixo']:
+                        self.direcao = 'baixo'
+                        self.posicao_y -= self.velocidade
+                    elif self.curvas['esquerda']:
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                elif self.curvas['cima']:
+                    self.posicao_y += self.velocidade
+
+            elif self.direcao == 'esquerda':
+                if self.alvo['coordenada_y'] < self.posicao_y and self.curvas['baixo']:
+                    self.direcao = 'baixo'
+                elif self.alvo['coordenada_x'] < self.posicao_x and self.curvas['direita']:
+                    self.posicao_x += self.velocidade
+
+                elif not self.curvas['esquerda']:
+                    if self.alvo['coordenada_y'] > self.posicao_y and self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y += self.velocidade
+                    elif self.alvo['coordenada_y'] < self.posicao_y and self.curvas['baixo']:
+                        self.direcao = 'virar para baixo'
+                        self.posicao_y -= self.velocidade
+                    elif self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']: # self.curvas['esquerda'] = pode ir pra esquerda
+                        self.direcao = 'direita'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y += self.velocidade
+                    elif self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['baixo']:
+                        self.direcao = 'baixo'
+                        self.posicao_y -= self.velocidade
+                elif self.curvas['esquerda']:
+                    self.posicao_x -= self.velocidade
+
+            elif self.direcao == 'direita':
+                if self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']:
+                    self.posicao_x += self.velocidade
+                elif not self.curvas['direita']:
+                    if self.alvo['coordenada_y'] < self.posicao_y and self.curvas['baixo']:
+                        self.direcao = 'virar para baixo'
+                        self.posicao_y -= self.velocidade
+                    elif self.alvo['coordenada_y'] > self.posicao_y and self.curvas['direita']:
+                        self.direcao = 'cima'
+                        self.posicao_y += self.velocidade
+                    elif self.alvo['coordenada_x'] < self.posicao_x and self.curvas['esquerda']: # self.curvas['esquerda'] = pode ir pra esquerda
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['esquerda']:
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['baixo']:
+                        self.direcao = 'baixo'
+                        self.posicao_y -= self.velocidade
+                    elif self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y += self.velocidade
+                    
                 
-                self.direcao_reversa = DIREITA
-                self.direcao = ESQUERDA
-                var_temp = 1
+                elif self.curvas['direita']:
+                    self.posicao_x += self.velocidade 
+            
+            elif self.direcao == 'baixo': 
+                if self.alvo['coordenada_y'] < self.posicao_y and self.curvas['baixo']: #pode continuar para baixo
+                    self.posicao_y -= self.velocidade
 
-        if var_temp == 0: #Não pode seguir nenhuma direção até o jogador:
-            #1. Pode seguir outra direção sem ser a reversa:
-            if len(self.direcoes) > 1:
-                if self.direcao_reversa in self.direcoes:
-                    self.direcoes.remove(self.direcao_reversa)  #Removendo a direção reversa dos caminhos possíveis
-                    self.direcao = self.direcoes[0]
-                    self.direcao_reversa = -self.direcao
-            #2. No caso de só possuir a direção reversa possível, seguí-la:
-            else:
-                self.direcao = self.direcoes[0]
-                self.direcao_reversa = -self.direcao
+                elif not self.curvas['baixo']:
+                    if self.alvo['coordenada_x'] > self.posicao_x and self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x += self.velocidade
+                    elif self.alvo['coordenada_x'] < self.posicao_x and self.curvas['esquerda']:
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                    elif self.alvo['coordenada_y'] > self.posicao_y and self.curvas['cima']: #pode continuar para baixo
+                        self.direcao = 'cima'
+                        self.posicao_y += self.velocidade
+                    elif self.curvas['esquerda']:
+                        self.direcao = 'esquerda'
+                        self.posicao_x -= self.velocidade
+                    elif self.curvas['direita']:
+                        self.direcao = 'direita'
+                        self.posicao_x += self.velocidade
+                    elif self.curvas['cima']:
+                        self.direcao = 'cima'
+                        self.posicao_y -= self.velocidade
 
-    def movimento_inimigo_2(self):
-            # Verificar o tamanho da lista de direções possíveis
-            if len(self.direcoes) > 1: 
-                if self.direcao_reversa in self.direcoes: # Remover a direção reversa
-                    self.direcoes.remove(self.direcao_reversa) # Randomizar entre as direções restantes
-                direcao_escolhida = random.choice(self.direcoes)
-            else:
-                direcao_escolhida = self.direcoes[0] # Seguir a única direção disponível, que é a reversa.
-
-            self.direcao = direcao_escolhida # Atualizar a direção do inimigo
-            self.direcao_reversa = -self.direcao # Atualizar a direção reversa
+                elif self.curvas['baixo']:
+                        self.posicao_y -= self.velocidade
