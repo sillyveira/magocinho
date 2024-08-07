@@ -1,8 +1,7 @@
-# MAGOCINHO🧙‍♂️
-O jogo acompanha o personagem principal que é o **MagoCINho**, ele é baseado no gnomo Crawly, e o objetivo dele é sobreviver aos guardas, coletar as moedas, poções e cogumelos pelo caminho. Será uma tarefa difícil, pois os inimigos irão persegui-lo até pegá-lo no labirinto.
 <p align="center">
   <img src="img/magocinhologo.png" width="300" height="300" alt="MagoCINho, nome do jogo">
 </p>
+O jogo acompanha o personagem principal que é o **MagoCINho**, ele é baseado no gnomo Crawly, e o objetivo dele é sobreviver aos guardas, coletar as moedas, poções e cogumelos pelo caminho. Será uma tarefa difícil, pois os inimigos irão persegui-lo até pegá-lo no labirinto.
 
 ## Membros e divisão das tarefas
 - <strong>Adrielly Alexandre</strong>: Gerência e idealização do projeto; Criação do design do jogo e todas as sprites; Criação de slides para a apresentação; Criação e execução da Tela Inicial; Criação e execução da Tela de Game Over; Implementação da trilha sonora; Apresentação do Slide.
