@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="img/magocinhologo.png" width="300" height="300" alt="MagoCINho, nome do jogo">
-</p>
+# MAGOCINHO🧙‍♂️
 O jogo acompanha o personagem principal que é o **MagoCINho**, ele é baseado no gnomo Crawly, e o objetivo dele é sobreviver aos guardas, coletar as moedas, poções e cogumelos pelo caminho. Será uma tarefa difícil, pois os inimigos irão persegui-lo até pegá-lo no labirinto.
 
 ## Membros e divisão das tarefas
