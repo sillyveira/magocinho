@@ -262,7 +262,17 @@ class JOGO:
                 pygame.time.set_timer(TIMER_INTANGIVEL, 0)
     def update(self):
         self.all_sprites.update()
-        self.playerg.update()
+        # Atualizando moedas quando atinge pontuação máxima
+        if self.player.pontos % 101 == 0:
+            self.atualizar_moedas()
+               
+    def atualizar_moedas(self):
+        for i in range(len(TILEMAP)):
+            for j in range(len(TILEMAP[i])):
+                if TILEMAP[i][j] == ".":
+                    Moeda(self, j, i)
+                if TILEMAP[i][j] == "g":
+                    Moeda(self,j, i)   
                
     def atualizar_itens(self):
         espacos = self.espacos_itens[:]
@@ -294,6 +304,7 @@ class JOGO:
         texto_formatado = texto.get_rect(center=(largura_tela // 2, 20))
 
         self.tela.blit(texto, texto_formatado)
+
         if self.player.intangivel == True:
             self.tela.blit(self.barreira, (self.player.rect.x, self.player.rect.y))
         self.ui.display(self.player)
