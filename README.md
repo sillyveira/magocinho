@@ -89,6 +89,7 @@ cd magocinho
 #Execute o arquivo 'main.py'
 python3 main.py
 ```
+Ou apenas baixe o arquivo .zip, extraia em algum lugar da sua escolha e execute o arquivo 'main.py'.
 
 #
 ###### _Projeto referente a cadeira de Introdução a Programação do CIN-UFPE no período 2024.1._
