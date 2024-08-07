@@ -10,19 +10,19 @@ O jogo acompanha o personagem principal que é o **MagoCINho**, ele é baseado n
 - <strong>Wesley Silveira</strong>: Gerência e idealização do projeto; Criação do esqueleto inicial do programa; Criação do repositório GitHub utilizado; Classe Player; Classe Item; Classe UI; Classe Vértice; Classe Inimigo; Classe Game; Classe Sprites; Apresentação do Slide; Implementação da animação das sprites.
 
 ## Arquitetura e organizacão do código
-* __config__
+<strong>1. config</strong>
 Esse arquivo define as configurações principais do jogo, como dimensões da tela, título, tamanho dos tiles, velocidade dos personagens e FPS. Ele também organiza as camadas de renderização, as direções de movimento do jogador e temporizadores para eventos especiais. Além disso, inclui uma lista do mapa do jogo com caracteres para diferentes terrenos e objetos, centralizando todas as constantes e configurações.
-* __inimigo__
+<strong>1. inimigo</strong>
 O arquivo define a __classe Inimigo__, que controla os inimigos no jogo. O inimigo é um sprite que se move pelo mapa, tentando seguir o jogador e mudando de direção em vértices. Ele escolhe a direção que o aproxima do jogador, evita repetir caminhos e, se necessário, seleciona outra direção possível. A classe também gerencia a velocidade e a colisão com outros objetos, proporcionando um comportamento funcional e “inteligente” para os inimigos.
-* __vertice__
+<strong>1. vertice</strong>
 A __classe Vertice__ representa pontos no mapa do jogo, armazenando sua posição, direções de movimento e um número único. É exibida como uma superfície roxa e ajuda a gerenciar movimento e colisões no jogo.
-* __player__
+<strong>1. player</strong>
 A __classe Player__ controla o personagem principal, gerenciando sua posição, imagem e velocidade. Ela move o jogador, altera a imagem conforme a direção, e lida com colisões. O jogador perde uma vida se colidir com um inimigo e pode usar poções e cogumelos com teclas específicas para efeitos temporários.
-* __main__
+<strong>1. main</strong>
 A função principal do jogo é responsável por manter o jogo em execução enquanto o jogador está ativo. Dentro do loop central, ela lida com eventos usando events(), atualiza o estado do jogo com update(), e desenha os elementos na tela com draw(). Esse ciclo continua até que o jogador perca ou complete a fase, garantindo que o jogo flua conforme o FPS configurado.
-* __sprites__
+<strong>1. sprites</strong>
 O arquivo sprites.py define várias classes para criar e gerenciar os sprites no jogo: __Classe Block__ que cria blocos que o jogador não pode atravessar, definindo sua posição e tamanho; __classe Chao__ cria o chão onde o jogador pode andar, posicionando a imagem do piso corretamente e definindo seu tamanho; __classe Hitbox__ cria uma área de colisão para o jogador, movendo-se com ele para detectar colisões; __classe HitboxInimigo__ similar à Hitbox, mas para inimigos, atualizando sua posição junto com o inimigo; __classe Barra__ cria uma barra de fundo para mostrar informações ou como parte da interface do usuário; e a __classe Item__ que cria itens que o jogador pode pegar, como moedas, poções e cogumelos.
-* __UI__
+<strong>1. UI</strong>
 A __classe UI__ desenha a interface do usuário no jogo. No método __init__, ela carrega imagens de ícones de itens e corações. O método desenhar_coracao desenha corações vazios e depois os substitui por corações cheios conforme a vida do jogador. E o método display atualiza a tela a cada frame com ícones de itens e corações, posicionando-os nas bordas da tela para mostrar o estado do jogador.
 
 ## Capturas de Tela
@@ -57,11 +57,11 @@ Os diversos conceitos aprendidos ao decorrer da disciplina foram utilizados dura
 Além disso, o emprego de **funções** favoreceu o desenvolvimento dos objetos das classes, tal qual os estudos sobre **Programação Orientada a Objetos (POO)**, uma exigência do projeto, facilitou a escrita do código, tornando mais fácil o seu entendimento e sua modificação.
 
 ## Desafios, Erros e Lições aprendidas
-* __Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?__
+<strong>1. Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?</strong>
 O maior erro cometido durante a confecção do projeto foi a falta de organização do tempo no início do trabalho, o que acabou prejudicando um pouco o andamento da construção do jogo. Entretanto, lidamos com isso ao atribuir definitivamente as tarefas de cada integrante do projeto, melhorando a organização interna e o uso do nosso tempo.
-* __Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?__
+<strong>1. Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?</strong>
 O maior desafio do projeto foi desenvolver a inteligência do inimigo no jogo. Para superá-lo, realizamos pesquisas aprofundadas e consultamos referências de inteligências criadas para inimigos de outros jogos.
-* __Quais as lições aprendidas durante o projeto?__
+<strong>1. Quais as lições aprendidas durante o projeto?</strong>
 Aprendemos a gerenciar nosso tempo de forma mais eficaz em projetos, nos aprofundamos em ferramentas com as quais não tínhamos familiaridade, como Pygame, GitHub, e Notion, além de aprendermos a delegar funções e a colaborar na criação de código em equipe.
 
 ## Instruções para execução e instalação
