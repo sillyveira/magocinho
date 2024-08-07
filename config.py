@@ -1,4 +1,4 @@
-import pygame
+import pygame 
 
 LARGURA_TELA = 1280
 ALTURA_TELA = 800
@@ -6,30 +6,34 @@ TITULO_JOGO = 'Magocinho'
 TILESIZE = 64
 TILESIZE_PLAYER = 60
 FPS = 60
-VELOCIDADE_JOGADOR = 3
-VELOCIDADE_INIMIGO = 2
 
-# CAMADAS
-GROUND_LAYER = 1
-PLAYER_LAYER = 2
+VELOCIDADE_COGUMELO = 5
+VELOCIDADE_JOGADOR  = 3
+VELOCIDADE_INIMIGO  = 2
+#CAMADAS
+
+GROUND_LAYER    = 1
+ITEM_LAYER      = 2
+PLAYER_LAYER    = 3
 
 ESQUERDA = -1
 DIREITA = 1
 BAIXO = 2
 CIMA = -2
 
+
 HORIZONTAL = 0
 VERTICAL = 1
 
 TIMER_DELAY_POCAO = 2000
 TIMER_DELAY_COGUMELO = 2000
-TIMER_DELAY_INTANGIVEL = 5000
+TIMER_DELAY_INTANGIVEL = 2000
 
-TIMER_POCAO = pygame.USEREVENT + 1
-TIMER_COGUMELO = pygame.USEREVENT + 2
-TIMER_INTANGIVEL = pygame.USEREVENT + 3
+TIMER_POCAO = pygame.USEREVENT+1
+TIMER_COGUMELO = pygame.USEREVENT+2
+TIMER_INTANGIVEL = pygame.USEREVENT+3
 
-tilemap = [
+TILEMAP = [
     'BBBBBBBBBBBBBBBBBBBB',
     'Bg.gBBg.gBBg.c.g..gB',
     'B.BggBpBg..gBBB.BB.B',
@@ -40,7 +44,26 @@ tilemap = [
     'B.BBB.BB.BBgg..gBBBB',
     'Bg...g.gg..ggBBg..gB',
     'B.BBBBB.B.BB.BBBBB.B',
-    'Bg.c.i.gBg..g..p..gB',
+    'Bg.c...gBg..g..p..gB',
     'BBBBBBBBBBBBBBBBBBBB',
     'BBBBBBBBBBBBBBBBBBBB'
 ]
+
+#Cores
+AZUL = (75, 91, 171)
+ESCURO = (50, 41, 71)
+CINZA = (143, 222, 93)
+
+#Imagens
+IMAGEM_LOGO = 'LOGO.png'
+IMAGEM_GAMEOVER = 'gameover.png'
+
+#Fonte texto
+FONTE = 'minecraft.ttf'
+
+#Audios
+MUSICA_START = 'magosoundtrack.MP3'
+TECLA_START = 'apertarbotãosoundtrack.MP3'
+
+MUSICA_GAMEOVER = 'gameoversoundtrack.MP3'
+TECLA_GAMEOVER = 'audiotchau.MP3'
