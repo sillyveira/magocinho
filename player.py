@@ -35,6 +35,10 @@ class Player(pygame.sprite.Sprite):
         self.imagens_cima = ['cima_1.png', 'cima_2.png']
         self.imagens_baixo = ['baixo_1.png', 'baixo_2.png']
 
+        self.game.barulho_perde_vida = pygame.mixer.Sound('lost_life_sound.wav')
+        self.game.barulho_pega_item = pygame.mixer.Sound('pick_itens_sound.wav')
+        self.game.barulho_usa_item = pygame.mixer.Sound('use_itens_sound.wav')
+
         self.speed = VELOCIDADE_JOGADOR
         self.x_c = 0
         self.y_c = 0
@@ -94,13 +98,14 @@ class Player(pygame.sprite.Sprite):
 
             if keys[pygame.K_q]: #usar pocao
                 print([self.rect.x, self.rect.y])
-                
+                self.game.barulho_usa_item.play()
                 if self.usingPotion == False:
                      self.temPotion = False
                      self.usingPotion = True
                      pygame.time.set_timer(TIMER_POCAO, TIMER_DELAY_POCAO)
 
             if keys[pygame.K_e]: #usar cogumelo
+                
                 if self.usingMush == False and self.temMush == True:
                     self.temMush = False
                     self.speed = 10
@@ -124,15 +129,18 @@ class Player(pygame.sprite.Sprite):
             if item.tipo == 'cogumelo' and self.temMush == False:
                 hit_item[0].kill() #remove o item do mapa
                 self.temMush = True
+                self.game.barulho_pega_item.play()
 
             if item.tipo == 'pocao' and self.temPotion == False:
                 hit_item[0].kill() #remove o item do mapa
                 self.temPotion = True
+                self.game.barulho_pega_item.play()
 
         hit_inimigo = pygame.sprite.spritecollide(self, self.game.enemies, False)
 
         if hit_inimigo and self.intangivel == False:
             self.intangivel = True
+            self.game.barulho_perde_vida.play()
             self.coracoes -= 1
             if self.coracoes == 0:
                 self.game.mostrar_tela_gameover()
