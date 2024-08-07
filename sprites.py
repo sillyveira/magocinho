@@ -1,17 +1,18 @@
+
 from config import *
 import math
 import random
 from os.path import join
 from os import walk
 
-#Classe dos blocos de colisão, o jogador não pode passar por eles e eles são invisíveis. 
+
+
 class Block(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
           self.game = game
           self._layer = GROUND_LAYER
           self.groups = self.game.all_sprites, self.game.blocks
           pygame.sprite.Sprite.__init__(self, self.groups)
-          #Multiplico pelo TILESIZE para que cada um esteja disposto a cada 64 pixels (ou o tilesize definido) e assim, seja desenhado certinho com o uso do tilemap. 
           self.x = x * TILESIZE
           self.y = y * TILESIZE
           self.width = TILESIZE
@@ -22,50 +23,65 @@ class Block(pygame.sprite.Sprite):
           self.rect.x = self.x
           self.rect.y = self.y
 
-class Moeda(pygame.sprite.Sprite):
-    def __init__(self, game, x, y):
-        self.game = game
-        self._layer = ITEM_LAYER
-        self.groups = self.game.all_sprites, self.game.items
-        pygame.sprite.Sprite.__init__(self, self.groups)
+          self.hitbox = pygame.Rect(self.rect.x, self.rect.y, self.rect.width, self.rect.height)
 
-        self.x = x * TILESIZE
-        self.y = y * TILESIZE
-        self.width = TILESIZE
-        self.height = TILESIZE
-
-        self.image = pygame.image.load(join('img', 'coin.png')).convert_alpha()
-
-        self.image = pygame.transform.scale(self.image, (self.width // 1.2, self.height // 1.2))
-
-        self.rect = self.image.get_rect()
-        self.rect.x = self.x + (TILESIZE - self.image.get_width()) // 2
-        self.rect.y = self.y + (TILESIZE - self.image.get_height()) // 2
-
-        self.tipo = 'moeda'
-
-#Classe do chão
 class Chao(pygame.sprite.Sprite):
-    def __init__(self, game, x, y, tem_moeda=False):
-        self.game = game
-        self._layer = GROUND_LAYER
-        self.groups = self.game.all_sprites, self.game.ground
-        pygame.sprite.Sprite.__init__(self, self.groups)
+    def __init__(self, game, x, y):
+          self.game = game
+          self._layer = GROUND_LAYER
+          self.groups = self.game.all_sprites, self.game.ground
+          pygame.sprite.Sprite.__init__(self, self.groups)
+          self.x = x * TILESIZE
+          self.y = y * TILESIZE
+          self.width = TILESIZE
+          self.height = TILESIZE
 
-        self.x = x * TILESIZE
-        self.y = y * TILESIZE
-        self.width = TILESIZE
-        self.height = TILESIZE
+          self.image = pygame.Surface([self.width, self.height])
+          self.image = pygame.image.load(join('img', f'piso.png')).convert_alpha()
+          self.rect = self.image.get_rect()
+          self.rect.x = self.x
+          self.rect.y = self.y
 
-        self.image = pygame.image.load(join('img', 'piso.png')).convert_alpha()
-        self.rect = self.image.get_rect()
-        self.rect.x = self.x
-        self.rect.y = self.y
+class Hitbox(pygame.sprite.Sprite):
+     def __init__(self, game, x, y):
+          self.game = game
+          self._layer = GROUND_LAYER
+          self.groups = self.game.all_sprites, self.game.ground
+          pygame.sprite.Sprite.__init__(self, self.groups)
+          self.x = x * TILESIZE
+          self.y = y * TILESIZE
+          self.width = TILESIZE
+          self.height = TILESIZE
 
-        if tem_moeda:   
-          Moeda(game, x, y)
 
-#Classe dos itens coletáveis
+          self.rect = self.game.player.rect
+          self.image = pygame.Surface([self.rect.width, self.rect.height])
+          self.image.fill('blue')
+
+     def update(self):
+          self.rect.x = self.game.player.rect.x
+          self.rect.y = self.game.player.rect.y
+
+class HitboxInimigo(pygame.sprite.Sprite):
+     def __init__(self, game, x, y):
+          self.game = game
+          self._layer = GROUND_LAYER
+          self.groups = self.game.all_sprites, self.game.ground
+          pygame.sprite.Sprite.__init__(self, self.groups)
+          self.x = x * TILESIZE
+          self.y = y * TILESIZE
+          self.width = TILESIZE
+          self.height = TILESIZE
+
+
+          self.rect = self.game.inimigo.rect
+          self.image = pygame.Surface([self.rect.width, self.rect.height])
+          self.image.fill('red')
+
+     def update(self):
+          self.rect.x = self.game.inimigo.rect.x
+          self.rect.y = self.game.inimigo.rect.y
+
 class Item(pygame.sprite.Sprite):
      def __init__(self, game, x, y, nome_item):
           self.game = game
@@ -83,7 +99,6 @@ class Item(pygame.sprite.Sprite):
           self.rect.x = self.x
           self.rect.y = self.y
 
-#Classe da imagem das barras dispostas no mapa 
 class Barra(pygame.sprite.Sprite):
      def __init__(self, game, x, y):
           self.game = game

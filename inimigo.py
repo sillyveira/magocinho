@@ -2,7 +2,7 @@ from config import *
 from sprites import Item
 from os.path import join
 from os import walk
-import random
+import math
 
 class Inimigo(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
@@ -22,10 +22,19 @@ class Inimigo(pygame.sprite.Sprite):
         self.ply_x = 0
         self.ply_y = 0
 
+        self.contagem = 0 
+        self.imagens_esquerda = ['esq_1.png', 'esq_2.png']
+        self.imagens_direita = ['dir_1.png', 'dir_2.png']
+        self.imagens_cima = ['up_1.png', 'up_2.png']
+        self.imagens_baixo = ['down_1.png', 'down_2.png']
+
+
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
+
         self.speed = VELOCIDADE_INIMIGO
+
         self.x_c = 0
         self.y_c = 0
         self.ultimo_vertice = 0
@@ -37,12 +46,20 @@ class Inimigo(pygame.sprite.Sprite):
         self.collision()
         if self.direcao == DIREITA:
             self.rect.x += self.speed
+            self.contagem = self.contagem + 0.1
+            self.image = pygame.image.load(join('img', 'guarda', self.imagens_direita[math.ceil(self.contagem) % len(self.imagens_direita)])).convert_alpha()
         elif self.direcao == ESQUERDA:
             self.rect.x -= self.speed
+            self.contagem = self.contagem + 0.1
+            self.image = pygame.image.load(join('img', 'guarda', self.imagens_esquerda[math.ceil(self.contagem) % len(self.imagens_esquerda)])).convert_alpha()
         elif self.direcao == CIMA:
             self.rect.y -= self.speed
+            self.contagem = self.contagem + 0.1
+            self.image = pygame.image.load(join('img', 'guarda', self.imagens_cima[math.ceil(self.contagem) % len(self.imagens_cima)])).convert_alpha()
         elif self.direcao == BAIXO:
             self.rect.y += self.speed
+            self.contagem = self.contagem + 0.1
+            self.image = pygame.image.load(join('img', 'guarda', self.imagens_baixo[math.ceil(self.contagem) % len(self.imagens_baixo)])).convert_alpha()
           
     def collision(self):
         hits = pygame.sprite.spritecollide(self, self.game.vertices, False)
@@ -82,6 +99,7 @@ class Inimigo(pygame.sprite.Sprite):
                 self.direcao = ESQUERDA
                 var_temp = 1
 
+
         if var_temp == 0: #Não pode seguir nenhuma direção até o jogador:
             #1. Pode seguir outra direção sem ser a reversa:
             if len(self.direcoes) > 1:
@@ -93,16 +111,3 @@ class Inimigo(pygame.sprite.Sprite):
             else:
                 self.direcao = self.direcoes[0]
                 self.direcao_reversa = -self.direcao
-
-
-    def movimento_inimigo_2(self):
-        # Verificar o tamanho da lista de direções possíveis
-        if len(self.direcoes) > 1:
-            if self.direcao_reversa in self.direcoes: # Remover a direção reversa
-                self.direcoes.remove(self.direcao_reversa) # Randomizar entre as direções restantes
-            direcao_escolhida = random.choice(self.direcoes)
-        else:
-            direcao_escolhida = self.direcoes[0] # Seguir a única direção disponível
-
-        self.direcao = direcao_escolhida # Atualizar a direção do inimigo
-        self.direcao_reversa = -self.direcao

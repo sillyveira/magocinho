@@ -1,10 +1,8 @@
-
 from config import *
 from sprites import Item
 import math
 import random
 from os.path import join
-from os import walk
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
@@ -15,8 +13,6 @@ class Player(pygame.sprite.Sprite):
 
         self.items = []
 
-        self.pontos = 0
-
         self.usingPotion = False
         self.usingMush = False
         self.temPotion = False
@@ -24,8 +20,8 @@ class Player(pygame.sprite.Sprite):
 
         self.contagem = 0 
 
-        self.x = x# * TILESIZE_PLAYER
-        self.y = y# * TILESIZE_PLAYER
+        self.x = x
+        self.y = y
         self.width = TILESIZE_PLAYER
         self.height = TILESIZE_PLAYER
 
@@ -37,9 +33,10 @@ class Player(pygame.sprite.Sprite):
         self.imagens_cima = ['cima_1.png', 'cima_2.png']
         self.imagens_baixo = ['baixo_1.png', 'baixo_2.png']
 
-        self.game.barulho_perde_vida = pygame.mixer.Sound('lost_life_sound.wav')
-        self.game.barulho_pega_item = pygame.mixer.Sound('pick_itens_sound.wav')
-        self.game.barulho_usa_item = pygame.mixer.Sound('use_itens_sound.wav')
+        self.imagens_intangivel_esquerda = ['intangivel_esquerda_1.png', 'intangivel_esquerda_2.png']
+        self.imagens_intangivel_direita = ['intangivel_direita_1.png', 'intangivel_direita_2.png']
+        self.imagens_intangivel_cima = ['intangivel_cima_1.png', 'intangivel_cima_2.png']
+        self.imagens_intangivel_baixo = ['intangivel_baixo_1.png', 'intangivel_baixo_2.png']
 
         self.speed = VELOCIDADE_JOGADOR
         self.x_c = 0
@@ -48,14 +45,15 @@ class Player(pygame.sprite.Sprite):
         self.direcao = ''
         self.coracoes = 3
         self.intangivel = False
-        #self.hitbox = pygame.Rect(self.rect.x + self.rect.width/2, self.rect.y + self.rect.width/2, 30, 30)
 
         self.rect = pygame.Rect(self.image.get_rect().left, self.image.get_rect().top, 40, self.image.get_rect().height - 20)
         self.rect.x = self.x
         self.rect.y = self.y
-    def update(self):
-            self.input_()
 
+    def update(self):
+        self.input_()
+
+        if not self.intangivel :
             if self.direcao == DIREITA:
                 self.x_c += self.speed
                 self.contagem = self.contagem + 0.1
@@ -72,86 +70,81 @@ class Player(pygame.sprite.Sprite):
                 self.y_c -= self.speed
                 self.contagem = self.contagem + 0.1
                 self.image = pygame.image.load(join('img', 'magocinho', self.imagens_cima[math.ceil(self.contagem) % len(self.imagens_cima)])).convert_alpha()
+        else :
+            if self.direcao == DIREITA:
+                self.x_c += self.speed
+                self.contagem = self.contagem + 0.1
+                self.image = pygame.image.load(join('img', 'magocinho', self.imagens_intangivel_direita[math.ceil(self.contagem) % len(self.imagens_intangivel_direita)])).convert_alpha()
+            elif self.direcao == ESQUERDA:
+                self.x_c -= self.speed
+                self.contagem = self.contagem + 0.1
+                self.image = pygame.image.load(join('img', 'magocinho', self.imagens_intangivel_esquerda[math.ceil(self.contagem) % len(self.imagens_intangivel_esquerda)])).convert_alpha()
+            elif self.direcao == BAIXO:
+                self.y_c += self.speed
+                self.contagem = self.contagem + 0.1
+                self.image = pygame.image.load(join('img', 'magocinho', self.imagens_intangivel_baixo[math.ceil(self.contagem) % len(self.imagens_intangivel_baixo)])).convert_alpha()
+            elif self.direcao == CIMA:
+                self.y_c -= self.speed
+                self.contagem = self.contagem + 0.1
+                self.image = pygame.image.load(join('img', 'magocinho', self.imagens_intangivel_cima[math.ceil(self.contagem) % len(self.imagens_intangivel_cima)])).convert_alpha()
 
-            self.rect.x += self.x_c  
-            self.collision("x")           
-            self.rect.y += self.y_c 
-            self.collision("y")
+        self.rect.x += self.x_c  
+        self.collision("x")           
+        self.rect.y += self.y_c 
+        self.collision("y")
 
-            self.x_c = 0
-            self.y_c = 0
-            self.game.ply_x = self.rect.x
-            self.game.ply_y = self.rect.y
+        self.x_c = 0
+        self.y_c = 0
+        self.game.ply_x = self.rect.x
+        self.game.ply_y = self.rect.y
+
     def input_(self):
-            keys = pygame.key.get_pressed()
-            if keys[pygame.K_RIGHT]: 
-                self.direcao = DIREITA              
-            if keys[pygame.K_LEFT]:
-                self.direcao = ESQUERDA
-            if keys[pygame.K_DOWN]:
-              #  self.y_c += self.speed
-                self.direcao = BAIXO
-
-
-            if keys[pygame.K_UP]:
-            #    self.y_c -= self.speed
-                self.direcao = CIMA
-
-
-            if keys[pygame.K_q]: #usar pocao
-                print([self.rect.x, self.rect.y])
-                self.game.barulho_usa_item.play()
-                if self.usingPotion == False:
-                     self.temPotion = False
-                     self.usingPotion = True
-                     pygame.time.set_timer(TIMER_POCAO, TIMER_DELAY_POCAO)
-
-            if keys[pygame.K_e]: #usar cogumelo
-                
-                if self.usingMush == False and self.temMush == True:
-                    self.temMush = False
-                    self.speed = 10
-                    self.usingMush = True
-                    pygame.time.set_timer(TIMER_COGUMELO, TIMER_DELAY_COGUMELO)   
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_RIGHT]: 
+            self.direcao = DIREITA              
+        if keys[pygame.K_LEFT]:
+            self.direcao = ESQUERDA
+        if keys[pygame.K_DOWN]:
+            self.direcao = BAIXO
+        if keys[pygame.K_UP]:
+            self.direcao = CIMA
+        if keys[pygame.K_q] and self.temPotion:  # Usar poção
+            self.temPotion = False
+            self.usingPotion = True
+            self.intangivel = True
+            pygame.time.set_timer(TIMER_POCAO, TIMER_DELAY_POCAO)
+        if keys[pygame.K_e] and self.temMush:  # Usar cogumelo
+            self.temMush = False
+            self.speed = 10
+            self.usingMush = True
+            pygame.time.set_timer(TIMER_COGUMELO, TIMER_DELAY_COGUMELO)
 
     def collision(self, direction):
         hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
         if direction == "x":
             if hits:
-                 if self.x_c > 0: self.rect.x = hits[0].rect.left - self.rect.width #colidindo com a esquerda
-                 if self.x_c < 0: self.rect.x = hits[0].rect.right #colidindo com a direita
+                if self.x_c > 0: self.rect.x = hits[0].rect.left - self.rect.width
+                if self.x_c < 0: self.rect.x = hits[0].rect.right
         if direction == "y":
             if hits:
-                 if self.y_c > 0: self.rect.y = hits[0].rect.top - self.rect.height
-                 if self.y_c < 0: self.rect.y = hits[0].rect.bottom
+                if self.y_c > 0: self.rect.y = hits[0].rect.top - self.rect.height
+                if self.y_c < 0: self.rect.y = hits[0].rect.bottom
+
         hit_item = pygame.sprite.spritecollide(self, self.game.items, False)
-        
         if hit_item:
             item = hit_item[0]
-            if item.tipo == 'cogumelo' and self.temMush == False:
-                hit_item[0].kill() #remove o item do mapa
+            if item.tipo == 'cogumelo' and not self.temMush:
+                hit_item[0].kill()
                 self.temMush = True
-                self.game.barulho_pega_item.play()
-
-            if item.tipo == 'pocao' and self.temPotion == False:
-                hit_item[0].kill() #remove o item do mapa
+            if item.tipo == 'pocao' and not self.temPotion:
+                hit_item[0].kill()
                 self.temPotion = True
-                self.game.barulho_pega_item.play()
-
-            if item.tipo == 'moeda':
-                hit_item[0].kill() #remove o item do mapa
-                self.pontos += 1
 
         hit_inimigo = pygame.sprite.spritecollide(self, self.game.enemies, False)
-
-        if hit_inimigo and self.intangivel == False:
+        if hit_inimigo and not self.intangivel:
             self.intangivel = True
-            self.game.barulho_perde_vida.play()
             self.coracoes -= 1
             if self.coracoes == 0:
-                self.game.mostrar_tela_gameover()
+                self.game.game_over()
             else:
                 pygame.time.set_timer(TIMER_INTANGIVEL, TIMER_DELAY_INTANGIVEL)
-            
-
-                

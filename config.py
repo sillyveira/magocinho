@@ -1,20 +1,19 @@
-import pygame 
-#configurações do jogo
+import pygame
+
 LARGURA_TELA = 1280
-ALTURA_TELA = 720
+ALTURA_TELA = 800
 TITULO_JOGO = 'Magocinho'
 TILESIZE = 64
 TILESIZE_PLAYER = 60
 FPS = 60
 VELOCIDADE_JOGADOR = 3
-VELOCIDADE_INIMIGO = 3
-#CAMADAS
+VELOCIDADE_INIMIGO = 2
 
-GROUND_LAYER    = 1
-ITEM_LAYER      = 2
-PLAYER_LAYER    = 3
+# CAMADAS
+GROUND_LAYER = 1
+PLAYER_LAYER = 2
 
-ESQUERDA = 0
+ESQUERDA = -1
 DIREITA = 1
 BAIXO = 2
 CIMA = -2
@@ -24,22 +23,24 @@ VERTICAL = 1
 
 TIMER_DELAY_POCAO = 2000
 TIMER_DELAY_COGUMELO = 2000
+TIMER_DELAY_INTANGIVEL = 5000
 
-TIMER_POCAO = pygame.USEREVENT+1
-TIMER_COGUMELO = pygame.USEREVENT+2
+TIMER_POCAO = pygame.USEREVENT + 1
+TIMER_COGUMELO = pygame.USEREVENT + 2
+TIMER_INTANGIVEL = pygame.USEREVENT + 3
 
-TILEMAP = [
+tilemap = [
     'BBBBBBBBBBBBBBBBBBBB',
-    'B...BB...BB........B',
-    'B.B..B.B....BBB.BB.B',
-    'B.BB.B.BBBB.BB..BB.B',
-    'B...g.......BB.BBB.B',
-    'BBB.B.BB.BB........B',
-    'B...B.BB.BB.BBBBBBBB',
-    'B.BBB.BB.BB.....BBBB',
-    'B............BB....B',
+    'Bg.gBBg.gBBg.c.g..gB',
+    'B.BggBpBg..gBBB.BB.B',
+    'B.BB.B.BBBB.BBggBB.B',
+    'Bg.gggg.g..gBB.BBB.B',
+    'BBBcB.BB.BBg..g.c.gB',
+    'Bg.gB.BB.BB.BBBBBBBB',
+    'B.BBB.BB.BBgg..gBBBB',
+    'Bg...g.gg..ggBBg..gB',
     'B.BBBBB.B.BB.BBBBB.B',
-    'B.......B..........B',
+    'Bg.c.i.gBg..g..p..gB',
     'BBBBBBBBBBBBBBBBBBBB',
     'BBBBBBBBBBBBBBBBBBBB'
 ]
