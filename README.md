@@ -2,12 +2,12 @@
 O jogo acompanha o personagem principal que é o **MagoCINho**, ele é baseado no gnomo Crawly, e o objetivo dele é sobreviver aos guardas, coletar as moedas, poções e cogumelos pelo caminho. Será uma tarefa difícil, pois os inimigos irão persegui-lo até pegá-lo no labirinto.
 
 ## Membros e divisão das tarefas
-*__Adrielly Alexandre -__ Gerência e idealização do projeto; Criação do design do jogo e todas as sprites; Criação de slides para a apresentação; Criação e execução da Tela Inicial; Criação e execução da Tela de Game Over; Implementação da trilha sonora; Apresentação do Slide.
-*__Angelina Santos -__ Integração da Tela Inicial ao jogo; Integração da Tela Game Over ao jogo; Design para o HUD do jogo; Otimização e integração da inteligência do segundo inimigo.
-*__Caio Lopes -__ Movimentação do jogador; Moeda e pontuação na tela; Incrementos na classe Item (poção).
-*__Gustavo Nogueira -__ Inteligência do Inimigo, incrementos na classe Inimigo; Inteligência do segundo inimigo.
-*__Luísa Longo -__ Movimentação do jogador; Moeda e pontuação na tela; Incrementos na classe Item (poção).
-*__Wesley Silveira -__ Gerência e idealização do projeto; Criação do esqueleto inicial do programa; Criação do repositório GitHub utilizado; Classe Player; Classe Item; Classe UI; Classe Vértice; Classe Inimigo; Classe Game; Classe Sprites; Apresentação do Slide; Implementação da animação das sprites.
+- <strong>Adrielly Alexandre</strong>: Gerência e idealização do projeto; Criação do design do jogo e todas as sprites; Criação de slides para a apresentação; Criação e execução da Tela Inicial; Criação e execução da Tela de Game Over; Implementação da trilha sonora; Apresentação do Slide.
+- <strong>Angelina Santos</strong>: Integração da Tela Inicial ao jogo; Integração da Tela Game Over ao jogo; Design para o HUD do jogo; Otimização e integração da inteligência do segundo inimigo.
+- <strong>Caio Lopes</strong>: Movimentação do jogador; Moeda e pontuação na tela; Incrementos na classe Item (poção).
+- <strong>Gustavo Nogueira</strong>: Inteligência do Inimigo, incrementos na classe Inimigo; Inteligência do segundo inimigo.
+- <strong>Luisa Longo</strong>:Movimentação do jogador; Moeda e pontuação na tela; Incrementos na classe Item (poção).
+- <strong>Wesley Silveira</strong>: Gerência e idealização do projeto; Criação do esqueleto inicial do programa; Criação do repositório GitHub utilizado; Classe Player; Classe Item; Classe UI; Classe Vértice; Classe Inimigo; Classe Game; Classe Sprites; Apresentação do Slide; Implementação da animação das sprites.
 
 ## Arquitetura e organizacão do código
 * __config__
