@@ -26,9 +26,11 @@ O jogo acompanha o personagem principal que é o **MagoCINho**, ele é baseado n
 > A __classe UI__ desenha a interface do usuário no jogo. No método __init__, ela carrega imagens de ícones de itens e corações. O método desenhar_coracao desenha corações vazios e depois os substitui por corações cheios conforme a vida do jogador. E o método display atualiza a tela a cada frame com ícones de itens e corações, posicionando-os nas bordas da tela para mostrar o estado do jogador.
 
 ## Capturas de Tela
-![Tela Inicial](telamenu.png)
-![Tela do Jogo](telamagocinho.webp)
-![Tela de Game over](telagameover.webp)
+<div style="display: flex; justify-content: space-around;">
+  <img src="img\telamagocinho.webp" alt="Tela do jogo">
+  <img src="img\telamenu.png" alt="Tela Menu" width="412">
+  <img src="img\telagameover.webp" alt="Tela Game Over" width="412">
+</div>
 
 ## Ferramentas, Frameworks e Bibliotecas utilizados
 * __Discord /Whatsapp__
@@ -57,7 +59,7 @@ Os diversos conceitos aprendidos ao decorrer da disciplina foram utilizados dura
 Além disso, o emprego de **funções** favoreceu o desenvolvimento dos objetos das classes, tal qual os estudos sobre **Programação Orientada a Objetos (POO)**, uma exigência do projeto, facilitou a escrita do código, tornando mais fácil o seu entendimento e sua modificação.
 
 ## Desafios, Erros e Lições aprendidas
-* --Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?__
+* __Qual foi o maior erro cometido durante o projeto? Como vocês lidaram com ele?__
 > O maior erro cometido durante a confecção do projeto foi a falta de organização do tempo no início do trabalho, o que acabou prejudicando um pouco o andamento da construção do jogo. Entretanto, lidamos com isso ao atribuir definitivamente as tarefas de cada integrante do projeto, melhorando a organização interna e o uso do nosso tempo.
 * __Qual foi o maior desafio enfrentado durante o projeto? Como vocês lidaram com ele?__
 > O maior desafio do projeto foi desenvolver a inteligência do inimigo no jogo. Para superá-lo, realizamos pesquisas aprofundadas e consultamos referências de inteligências criadas para inimigos de outros jogos.
@@ -87,6 +89,7 @@ cd magocinho
 #Execute o arquivo 'main.py'
 python3 main.py
 ```
+Ou apenas baixe o arquivo .zip, extraia em algum lugar da sua escolha e execute o arquivo 'main.py'.
 
 #
 ###### _Projeto referente a cadeira de Introdução a Programação do CIN-UFPE no período 2024.1._
