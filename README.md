@@ -12,7 +12,7 @@ O jogo acompanha o personagem principal que é o **MagoCINho**, ele é baseado n
 ## Arquitetura e organizacão do código
 <strong>1. config</strong>
 Esse arquivo define as configurações principais do jogo, como dimensões da tela, título, tamanho dos tiles, velocidade dos personagens e FPS. Ele também organiza as camadas de renderização, as direções de movimento do jogador e temporizadores para eventos especiais. Além disso, inclui uma lista do mapa do jogo com caracteres para diferentes terrenos e objetos, centralizando todas as constantes e configurações.
-<strong>1. inimigo</strong>
+<strong>2. inimigo</strong>
 O arquivo define a __classe Inimigo__, que controla os inimigos no jogo. O inimigo é um sprite que se move pelo mapa, tentando seguir o jogador e mudando de direção em vértices. Ele escolhe a direção que o aproxima do jogador, evita repetir caminhos e, se necessário, seleciona outra direção possível. A classe também gerencia a velocidade e a colisão com outros objetos, proporcionando um comportamento funcional e “inteligente” para os inimigos.
 <strong>1. vertice</strong>
 A __classe Vertice__ representa pontos no mapa do jogo, armazenando sua posição, direções de movimento e um número único. É exibida como uma superfície roxa e ajuda a gerenciar movimento e colisões no jogo.
