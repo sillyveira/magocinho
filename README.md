@@ -26,9 +26,11 @@ O jogo acompanha o personagem principal que é o **MagoCINho**, ele é baseado n
 > A __classe UI__ desenha a interface do usuário no jogo. No método __init__, ela carrega imagens de ícones de itens e corações. O método desenhar_coracao desenha corações vazios e depois os substitui por corações cheios conforme a vida do jogador. E o método display atualiza a tela a cada frame com ícones de itens e corações, posicionando-os nas bordas da tela para mostrar o estado do jogador.
 
 ## Capturas de Tela
-![Tela Inicial](https:/img/telamenu.png)
-![Tela do Jogo](https:/img/telamagocinho.webp)
-![Tela de Game over](https:/img/telamagocinho.webp)
+<div style="display: flex; justify-content: space-around;">
+  <img src="img\telamagocinho.webp" alt="Imagem 1">
+  <img src="img\telamenu.png" alt="Imagem 2" width="412">
+  <img src="img\telagameover.webp" alt="Imagem 3" width="412">
+</div>
 
 ## Ferramentas, Frameworks e Bibliotecas utilizados
 * __Discord /Whatsapp__
